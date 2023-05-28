@@ -20,7 +20,7 @@ interface IArticle extends Document {
   categories?: string[];
   feature_image_url?: string;
   elements: IArticleElement[];
-  authors: string[];
+  author_ids: string[];
   status: IStatus;
   created_at: Date;
   updated_at: Date;
@@ -32,7 +32,7 @@ const articleSchema = new Schema<IArticle>({
     categories: [{ type: String, required: false }],
     feature_image_url: { type: String },
     elements: [],
-    authors: [{ type: String, required: false }],
+    author_ids: [{ type: String, required: false }],
     status: {
         status: { type: String, required: true, default: "pending" },
         created_at: { type: Date, required: true, default: new Date() },
@@ -40,7 +40,14 @@ const articleSchema = new Schema<IArticle>({
     },
     created_at: { type: Date, required: true, default: new Date() },
     updated_at: { type: Date, required: true, default: new Date() }
-  });
+  }, 
+  {
+    timestamps: { 
+        updatedAt: 'updated_at', 
+        createdAt: 'created_at' 
+    } // Add this option to update the 'updated_at' field automatically
+  }
+);
 
 
 const ArticleModel = mongoose.model<IArticle>('Article', articleSchema);
