@@ -33,9 +33,60 @@ const authorSchema = new Schema<IAuthor>({
 
 const AuthorModel = mongoose.model<IAuthor>('Author', authorSchema);
 
+// Interfaces for class methods
+
+interface IResponse {
+  message: string;
+  details?: object;
+}
+
+interface IAddPlatform {
+    name: string;
+    url: string;
+    platform: string;
+}
+
+interface IUpdatePlatform {
+  name?: string;
+  url?: string;
+}
+
 class Author extends BaseModel<IAuthor> {
   constructor() {
     super(authorSchema);
+  }
+
+  /**
+   * @NOT_COMPLETE
+   */
+
+  async addPlatform(id: string, options: IAddPlatform): Promise<IResponse>{
+
+    return {
+      message: "Platform added"
+    }
+  }
+
+  /**
+   * @NOT_COMPLETE
+   */
+
+  async removePlatform(id: string, index: number): Promise<IResponse>{
+
+    return {
+      message: "Platform removed"
+    }
+  }
+
+  /**
+   * @NOT_COMPLETE
+   */
+
+  async updatePlatform(id: string, index: number, options: IUpdatePlatform): Promise<IResponse>{
+
+    return {
+      message: "Platform updated"
+    }
   }
 }
 

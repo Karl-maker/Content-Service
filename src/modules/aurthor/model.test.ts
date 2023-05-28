@@ -56,7 +56,7 @@ describe('ArticleModel', () => {
     expect(found_article.social_media_handles[0].platform).toBe(article.social_media_handles[0].platform);
   });
 
-  it('Should create new article without un-required data', async () => {
+  it('Should create new article with required data only', async () => {
 
     const data = {
       first_name: "Bill",
