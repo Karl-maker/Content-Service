@@ -1,5 +1,10 @@
 import mongoose, { Model, Document, Query } from 'mongoose';
 
+export interface IResponse {
+  message: string;
+  details?: object;
+}
+
 class BaseModel<T extends Document> {
   public model: Model<T>;
 
