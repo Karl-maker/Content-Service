@@ -24,7 +24,7 @@ class BaseModel<T extends Document> {
   }
 
   async update(_id: string, options: object): Promise<any> {
-    return await this.model.updateOne({ _id }).exec();
+    return await this.model.updateOne({ _id }, { ...options }).exec();
   }
 
   // Add other common methods as needed

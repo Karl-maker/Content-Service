@@ -1,10 +1,10 @@
-import ArticleModel from "./model";
+import AuthorModel from "./model";
 import config from "../../config";
 import mongoose from "mongoose";
 
 const { service } = config;
 
-describe('ArticleModel', () => {
+describe('AuthorModel', () => {
   beforeAll(async () => {
     await mongoose.connect(service.content.test_db.url);
   });
@@ -14,10 +14,10 @@ describe('ArticleModel', () => {
   });
 
   beforeEach(async () => {
-    await ArticleModel.model.deleteMany();
+    await AuthorModel.model.deleteMany();
   });
 
-  it('Should create new article with all data', async () => {
+  it('Should create new author with all data', async () => {
 
     const data = {
       first_name: "Bill",
@@ -36,24 +36,24 @@ describe('ArticleModel', () => {
 
     // create article
 
-    const article = await ArticleModel.create(data);
+    const author = await AuthorModel.create(data);
 
     // find article
 
-    const found_article = await ArticleModel.findById(article.id);
+    const found_author = await AuthorModel.findById(author.id);
 
     // match result
 
-    expect(found_article).toBeDefined();
-    expect(found_article.first_name).toBe(article.first_name);
-    expect(found_article.last_name).toBe(article.last_name);
-    expect(found_article.description).toBe(article.description);
-    expect(found_article.display_image_url).toBe(article.display_image_url);
-    expect(found_article.description).toBe(article.description);
-    expect(found_article.owner_id).toBe(article.owner_id);
-    expect(found_article.social_media_handles[0].url).toBe(article.social_media_handles[0].url);
-    expect(found_article.social_media_handles[0].name).toBe(article.social_media_handles[0].name);
-    expect(found_article.social_media_handles[0].platform).toBe(article.social_media_handles[0].platform);
+    expect(found_author).toBeDefined();
+    expect(found_author.first_name).toBe(author.first_name);
+    expect(found_author.last_name).toBe(author.last_name);
+    expect(found_author.description).toBe(author.description);
+    expect(found_author.display_image_url).toBe(author.display_image_url);
+    expect(found_author.description).toBe(author.description);
+    expect(found_author.owner_id).toBe(author.owner_id);
+    expect(found_author.social_media_handles[0].url).toBe(author.social_media_handles[0].url);
+    expect(found_author.social_media_handles[0].name).toBe(author.social_media_handles[0].name);
+    expect(found_author.social_media_handles[0].platform).toBe(author.social_media_handles[0].platform);
   });
 
   it('Should create new article with required data only', async () => {
@@ -63,21 +63,23 @@ describe('ArticleModel', () => {
       last_name: "Taylor",
     };
 
-    // create article
+    // create author
 
-    const article = await ArticleModel.create(data);
+    const author = await AuthorModel.create(data);
 
-    // find article
+    // find author
 
-    const found_article = await ArticleModel.findById(article.id);
+    const found_author = await AuthorModel.findById(author.id);
 
     // match result
 
-    expect(found_article).toBeDefined();
-    expect(found_article.first_name).toBe(article.first_name);
-    expect(found_article.last_name).toBe(article.last_name);
-    expect(found_article.description).toBe(article.description);
-    expect(found_article.owner_id).toBe("");
+    expect(found_author).toBeDefined();
+    expect(found_author.first_name).toBe(author.first_name);
+    expect(found_author.last_name).toBe(author.last_name);
+    expect(found_author.description).toBeUndefined();
+    expect(found_author.display_image_url).toBeUndefined();
+    expect(found_author.owner_id).toBe("");
+    expect(found_author.social_media_handles).toHaveLength(0);
   });
 
 });
