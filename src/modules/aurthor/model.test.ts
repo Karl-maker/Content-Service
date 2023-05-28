@@ -82,4 +82,66 @@ describe('AuthorModel', () => {
     expect(found_author.social_media_handles).toHaveLength(0);
   });
 
+  it("Should find authors by query", async () => {
+    // Create mock authors
+    const data_1 = {
+      first_name: "John",
+      last_name: "Doe",
+    };
+    const data_2 = {
+      first_name: "Jane",
+      last_name: "Smith",
+    };
+    await AuthorModel.create(data_1);
+    await AuthorModel.create(data_2);
+
+    // Find authors by query
+    const query = { first_name: "John" };
+    const found_authors = await AuthorModel.find(query);
+
+    expect(found_authors.length).toBe(1);
+    expect(found_authors[0].first_name).toBe(data_1.first_name);
+    expect(found_authors[0].last_name).toBe(data_1.last_name);
+  });
+
+  it("Should delete an author", async () => {
+    // Create a mock author
+    const data = {
+      first_name: "John",
+      last_name: "Doe",
+    };
+    const author = await AuthorModel.create(data);
+
+    // Delete the author
+    await AuthorModel.delete(author._id);
+
+    // Try to find the deleted author
+    const deleted_author = await AuthorModel.findById(author._id);
+
+    expect(deleted_author).toBeNull();
+  });
+
+  it("Should update an author", async () => {
+    // Create a mock author
+    const data = {
+      first_name: "John",
+      last_name: "Doe",
+    };
+    const author = await AuthorModel.create(data);
+
+    // Update the author
+    const updated_data = {
+      first_name: "John",
+      last_name: "Smith",
+    };
+    await AuthorModel.update(author._id, updated_data);
+
+    // Find the updated author
+    const updated_author = await AuthorModel.findById(author._id);
+
+    expect(updated_author).toBeDefined();
+    expect(updated_author?.first_name).toBe(updated_data.first_name);
+    expect(updated_author?.last_name).toBe(updated_data.last_name);
+  });
 });
+
