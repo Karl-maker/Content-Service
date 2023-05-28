@@ -19,8 +19,12 @@ class BaseModel<T extends Document> {
     return await this.model.find(query).exec();
   }
 
-  async deleteById(_id: string): Promise<any> {
+  async delete(_id: string): Promise<any> {
     return await this.model.deleteOne({ _id }).exec();
+  }
+
+  async update(_id: string, options: object): Promise<any> {
+    return await this.model.updateOne({ _id }).exec();
   }
 
   // Add other common methods as needed

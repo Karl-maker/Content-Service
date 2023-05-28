@@ -6,7 +6,7 @@ const { service } = config;
 
 describe('ArticleModel', () => {
   beforeAll(async () => {
-    await mongoose.connect(service.content.db.url);
+    await mongoose.connect(service.content.test_db.url);
   });
 
   afterAll(async () => {
