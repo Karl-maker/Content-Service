@@ -63,7 +63,6 @@ describe('ArticleModel', () => {
     expect(found_article.updated_at).toEqual(data.updated_at);
   });
 
-
   it("Should delete article", async () => {
     const data = {
       headline: "Sample Article",

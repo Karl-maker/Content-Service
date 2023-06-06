@@ -59,6 +59,18 @@ class Article extends BaseModel<IArticle> {
     super(articleSchema);
   }
 
+  async uploadImage() {
+    
+  }
+
+  async uploadFeatureImage() {
+
+  }
+
+  async uploadImageElement() {
+    
+  }
+
 }
 
 export default new Article();

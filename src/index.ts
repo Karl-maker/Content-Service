@@ -1,8 +1,8 @@
 import express from "express";
 import config from "./config";
-import logger from "./services/logger";
+import logger from "./helpers/logger";
 import pinoHTTP from 'pino-http';
-import db from "./services/db";
+import db from "./helpers/db";
 
 const app = express();
 
