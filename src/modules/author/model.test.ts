@@ -60,7 +60,7 @@ describe('AuthorModel', () => {
     expect(found_author?.social_media_handles[0].platform).toBe(author.social_media_handles[0].platform);
   });
 
-  it('Should create new article with required data only', async () => {
+  it('Should create new author with required data only', async () => {
 
     const data = {
       first_name: "Bill",
